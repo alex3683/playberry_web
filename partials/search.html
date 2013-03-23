@@ -1,0 +1,42 @@
+<div class="container">
+
+    <form class="form-search">
+        <div class="input-append">
+            <input type="text" class="input-xxlarge search-query" data-ng-model="searchKey" placeholder="enter artist, album or track">
+            <button type="submit" class="btn" data-ng-click="search()">Search</button>
+        </div>
+    </form>
+
+
+</div>
+
+<div class="container" data-ng-show="searchResult">
+    Showing results for {{searchKey}}
+
+    <h3>Artists</h3>
+    <ul class="no-bullets">
+        <li data-ng-repeat="artist in searchResult.artists">
+            <a href="javascript:void(0);" data-ng-click="enqueue(artist)"><i class="icon-plus-sign"></i></a>
+            <a href="javascript:void(0);" data-ng-click="play(artist)"><i class="icon-play"></i></a>
+            {{artist.name}}
+        </li>
+    </ul>
+
+    <h3>Albums</h3>
+    <ul class="no-bullets">
+        <li data-ng-repeat="album in searchResult.albums">
+            <a href="javascript:void(0);" data-ng-click="enqueue(album)"><i class="icon-plus-sign"></i></a>
+            <a href="javascript:void(0);" data-ng-click="play(album)"><i class="icon-play"></i></a>
+            {{album.name}} ({{album.year}}, by {{album['artist-name']}})
+        </li>
+    </ul>
+
+    <h3>Tracks</h3>
+    <ul class="no-bullets">
+        <li data-ng-repeat="track in searchResult.tracks">
+            <a href="javascript:void(0);" data-ng-click="enqueue(track)"><i class="icon-plus-sign"></i></a>
+            <a href="javascript:void(0);" data-ng-click="play(track)"><i class="icon-play"></i></a>
+            {{track.title}} ({{track.year}}, by {{track.artist}})
+        </li>
+    </ul>
+</div>
