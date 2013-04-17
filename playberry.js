@@ -5,49 +5,42 @@ require( [
 
    var module = angular.module( 'playberry', [ 'ng', 'dependencies' ] );
 
+   var defaultPath = '/queue';
    var routes = [
-      {
-         path: '/search',
-         title: 'Search',
-         templateUrl: 'partials/search.html',
-         controller: 'SearchController'
-      },
       {
          path: '/queue',
          title: 'Queue',
          templateUrl: 'partials/queue.html',
          controller: 'QueueController'
+      },
+      {
+         path: '/search',
+         title: 'Search',
+         templateUrl: 'partials/search.html',
+         controller: 'SearchController'
       }
    ];
 
    module.config( [ '$routeProvider', function( $routeProvider ) {
 
-      routes.forEach( function() {
-
-      } );
-
-      $routeProvider.when( '/search', {
-         templateUrl: 'partials/search.html',
-         controller: 'SearchController'
-      } );
-
-      $routeProvider.when( '/queue', {
-         templateUrl: 'partials/queue.html',
-         controller: 'QueueController'
+      routes.forEach( function( route ) {
+         $routeProvider.when( route.path, {
+            templateUrl: route.templateUrl,
+            controller: route.controller
+         } );
       } );
 
       $routeProvider.otherwise( {
-         redirectTo: '/queue'
+         redirectTo: defaultPath
       } );
    } ] );
 
    module.run( [ '$rootScope', '$location', function( $rootScope, $location ) {
-      console.log( $location.hash() );
-
       $rootScope.routes = routes;
-      $rootScope.$on( '$routeChangeSuccess', function( event, route, previous ) {
-         console.log( $location.hash() );
-      } );
+
+      $rootScope.isActive = function( route ) {
+         return $location.path() === route.path;
+      }
    } ] );
 
    angular.bootstrap( document, [ 'playberry' ] );

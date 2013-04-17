@@ -3,7 +3,8 @@
 <head>
     <title>Playberry</title>
     <meta http-equiv="cache-control" content="no-cache">
-    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
     <link href="playberry.css" rel="stylesheet">
 </head>
 <body data-ng-cloak>
@@ -20,11 +21,29 @@
                 <div class="nav-collapse collapse">
                     <ul class="nav">
                         <li data-ng-class="{active: isActive(route)}" data-ng-repeat="route in routes">
-                            <a href="{{route.link}}">{{route.title}}</a>
+                            <a href="#{{route.path}}">{{route.title}}</a>
                         </li>
-                        <li class="active"><a href="#/queue">Queue</a></li>
-                        <li><a href="#/search">Search</a></li>
                     </ul>
+
+                    <div class="btn-toolbar">
+                        <div class="btn-group">
+                            <a class="btn" href="javascript:void(0);"><i class="icon-fast-backward"></i></a>
+                            <a class="btn" href="javascript:void(0);"><i class="icon-pause"></i></a>
+                            <a class="btn" href="javascript:void(0);"><i class="icon-play"></i></a>
+                            <a class="btn" href="javascript:void(0);"><i class="icon-fast-forward"></i></a>
+                        </div>
+
+                        <div class="track-info-container">
+                            <div class="track-info">
+                                Artist - Current Track
+                            </div>
+                            <div class="progress track-progress">
+                                <div class="bar" style="width: 60%;"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div><!--/.nav-collapse -->
             </div>
         </div>
